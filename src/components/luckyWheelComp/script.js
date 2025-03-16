@@ -8,7 +8,7 @@ const LuckyWheel = ({ segments }) => {
     if (spinning) return;
     setSpinning(true);
     const randomRotation = Math.floor(Math.random() * 360) + 3600;
-    setRotation(randomRotation);
+    setRotation((prevRotation) => prevRotation + randomRotation);
 
     setTimeout(() => {
       setSpinning(false);
@@ -16,7 +16,7 @@ const LuckyWheel = ({ segments }) => {
   };
 
   return (
-    <div style={{ textAlign: "center", position: "relative" }}>
+    <div style={{ textAlign: "center", position: "relative", width: "300px", height: "300px", margin: "auto" }}>
       <div
         style={{
           width: "300px",
@@ -52,33 +52,34 @@ const LuckyWheel = ({ segments }) => {
             </div>
           );
         })}
+        <button
+          onClick={spinWheel}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            padding: "10px 20px",
+            fontSize: "16px",
+            fontWeight: "bold",
+            borderRadius: "50%",
+            border: "none",
+            backgroundColor: "#007BFF",
+            color: "white",
+            cursor: "pointer",
+            width: "80px",
+            height: "80px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.3)",
+            zIndex: 10,
+          }}
+          disabled={spinning}
+        >
+          Spin
+        </button>
       </div>
-      <button
-        onClick={spinWheel}
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          padding: "10px 20px",
-          fontSize: "16px",
-          fontWeight: "bold",
-          borderRadius: "50%",
-          border: "none",
-          backgroundColor: "#007BFF",
-          color: "white",
-          cursor: "pointer",
-          width: "80px",
-          height: "80px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          boxShadow: "0 0 10px rgba(0, 0, 0, 0.3)",
-        }}
-        disabled={spinning}
-      >
-        Spin
-      </button>
     </div>
   );
 };
