@@ -5,16 +5,6 @@ import LuckyWheel from "./components/luckyWheelComp/script";
 
 function App() {
 
-  const [segments, setSegments] = useState([
-    { color: "red", label: "Prize 1" },
-    { color: "blue", label: "Prize 2" },
-    { color: "green", label: "Prize 3" },
-    { color: "yellow", label: "Prize 4" },
-    { color: "black", label: "Prize 5" },
-  ]);
-  const [segmentCount, setSegmentCount] = useState(5)
-  const [inputValue, setInputValue] = useState("");
-
   const getRandomColor = () => {
     const letters = "0123456789ABCDEF";
     let color = "#";
@@ -23,6 +13,16 @@ function App() {
     }
     return color;
   };
+
+  const [segments, setSegments] = useState([
+    { color: getRandomColor(), label: "label 1" },
+    { color: getRandomColor(), label: "label 2" },
+    { color: getRandomColor(), label: "label 3" },
+    { color: getRandomColor(), label: "label 4" },
+  ]);
+  const [segmentCount, setSegmentCount] = useState(5)
+  const [inputValue, setInputValue] = useState("");
+
   
   const addSegment = () => {
     if (inputValue.trim() === "") {
