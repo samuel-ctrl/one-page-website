@@ -3,7 +3,7 @@ import React from 'react';
 const AdBanner = () => {
   return (
     <div className="ad-banner">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4005409526739627" crossorigin="anonymous"></script>
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
