@@ -4,6 +4,9 @@ const AdBanner = () => {
   return (
     <div className="ad-banner">
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4005409526739627" crossorigin="anonymous"></script>
+      <amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-4005409526739627">
+      </amp-auto-ads>
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
