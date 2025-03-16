@@ -10,9 +10,18 @@ function App() {
     { color: "blue", label: "Prize 2" },
     { color: "green", label: "Prize 3" },
   ]);
+
+  const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
   
   const addSegment = () => {
-    setSegments([...segments, { color: "yellow", label: `Prize ${segments.length + 1}` }]);
+    setSegments([...segments, { color: getRandomColor(), label: `Prize ${segments.length + 1}` }]);
   };
   
   const removeSegment = () => {
