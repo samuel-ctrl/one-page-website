@@ -5,15 +5,14 @@ const LuckyWheel = ({ segments }) => {
   const [spinning, setSpinning] = useState(false);
 
   const spinWheel = () => {
-    if (spinning) return; // Prevent multiple spins
+    if (spinning) return;
     setSpinning(true);
-    const randomRotation = Math.floor(Math.random() * 360) + 3600; // Spin multiple times
+    const randomRotation = Math.floor(Math.random() * 360) + 3600;
     setRotation(randomRotation);
 
-    // Reset spinning state after the animation ends
     setTimeout(() => {
       setSpinning(false);
-    }, 4000); // Match the duration of the transition
+    }, 4000);
   };
 
   return (
@@ -31,27 +30,29 @@ const LuckyWheel = ({ segments }) => {
           position: "relative",
         }}
       >
-        {/* Display segment labels */}
-        {segments.map((seg, i) => (
-          <div
-            key={i}
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: `rotate(${(360 / segments.length) * i + 90 / segments.length}deg) translate(150px) rotate(-${(360 / segments.length) * i + 90 / segments.length}deg)`,
-              color: "white",
-              fontWeight: "bold",
-              textAlign: "center",
-              width: "100px",
-              transformOrigin: "0 0",
-            }}
-          >
-            {seg.label}
-          </div>
-        ))}
+        {segments.map((seg, i) => {
+          const angle = (360 / segments.length) * i;
+          return (
+            <div
+              key={i}
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: `rotate(${angle}deg) translate(110px) rotate(${angle * -1}deg)`,
+                transformOrigin: "0 0",
+                color: "white",
+                fontWeight: "bold",
+                fontSize: "14px",
+                textAlign: "center",
+                width: "80px",
+              }}
+            >
+              {seg.label}
+            </div>
+          );
+        })}
       </div>
-      {/* Spin button inside the circle */}
       <button
         onClick={spinWheel}
         style={{

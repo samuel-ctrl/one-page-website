@@ -56,7 +56,7 @@ function App() {
             style={{ padding: "5px", marginRight: "10px" }}
           />
           <button onClick={addSegment} disabled={segmentCount > 24}>Add Segment</button>
-          <button onClick={removeSegment} disabled={segmentCount == 1}>Remove Segment</button>
+          <button onClick={removeSegment} disabled={segmentCount < 2}>Remove Segment</button>
         </div>
       </div>
     </div>
