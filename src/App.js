@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from "react";
 import Header from './components/Header';
 import AdBanner from './components/AdBanner';
-import React, { useState } from "react";
 
 function App() {
 
