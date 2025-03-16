@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from './components/Header';
 import AdBanner from './components/AdBanner';
+import LuckyWheel from "./components/luckyWheelComp/script";
 
 function App() {
 
