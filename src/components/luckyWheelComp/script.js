@@ -5,14 +5,15 @@ const LuckyWheel = ({ segments }) => {
   const [spinning, setSpinning] = useState(false);
 
   const spinWheel = () => {
-    if (spinning) return;
+    if (spinning) return; // Prevent multiple spins
     setSpinning(true);
-    const randomRotation = Math.floor(Math.random() * 360) + 3600;
+    const randomRotation = Math.floor(Math.random() * 360) + 3600; // Spin multiple times
     setRotation(randomRotation);
 
+    // Reset spinning state after the animation ends
     setTimeout(() => {
       setSpinning(false);
-    }, 4000);
+    }, 4000); // Match the duration of the transition
   };
 
   return (
@@ -30,6 +31,7 @@ const LuckyWheel = ({ segments }) => {
           position: "relative",
         }}
       >
+        {/* Display segment labels */}
         {segments.map((seg, i) => (
           <div
             key={i}
@@ -37,7 +39,7 @@ const LuckyWheel = ({ segments }) => {
               position: "absolute",
               top: "50%",
               left: "50%",
-              transform: `rotate(${(360 / segments.length) * i + 180 / segments.length}deg) translate(150px) rotate(-${(360 / segments.length) * i + 180 / segments.length}deg)`,
+              transform: `rotate(${(360 / segments.length) * i + 90 / segments.length}deg) translate(150px) rotate(-${(360 / segments.length) * i + 90 / segments.length}deg)`,
               color: "white",
               fontWeight: "bold",
               textAlign: "center",
@@ -49,6 +51,7 @@ const LuckyWheel = ({ segments }) => {
           </div>
         ))}
       </div>
+      {/* Spin button inside the circle */}
       <button
         onClick={spinWheel}
         style={{
@@ -64,6 +67,12 @@ const LuckyWheel = ({ segments }) => {
           backgroundColor: "#007BFF",
           color: "white",
           cursor: "pointer",
+          width: "80px",
+          height: "80px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.3)",
         }}
         disabled={spinning}
       >
