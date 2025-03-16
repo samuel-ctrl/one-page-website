@@ -13,6 +13,7 @@ function App() {
     { color: "black", label: "Prize 5" },
   ]);
   const [segmentCount, setSegmentCount] = useState(5)
+  const [inputValue, setInputValue] = useState("");
 
   const getRandomColor = () => {
     const letters = "0123456789ABCDEF";
@@ -24,8 +25,13 @@ function App() {
   };
   
   const addSegment = () => {
-    setSegments([...segments, { color: getRandomColor(), label: `Prize ${segments.length + 1}` }]);
+    if (inputValue.trim() === "") {
+      alert("Please enter a label for the segment!");
+      return;
+    }
+    setSegments([...segments, { color: getRandomColor(), label: inputValue }]);
     setSegmentCount((prev)=>prev+1)
+    setInputValue("");
   };
   
   const removeSegment = () => {
@@ -39,10 +45,19 @@ function App() {
     <div className="App">
       <Header />
       <AdBanner />
-      <div>
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
         <LuckyWheel segments={segments} />
-        <button onClick={addSegment} disabled={segmentCount > 24}>Add Segment</button>
-        <button onClick={removeSegment} disabled={segmentCount < 4}>Remove Segment</button>
+        <div style={{ marginTop: "20px" }}>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder="Enter segment label"
+            style={{ padding: "5px", marginRight: "10px" }}
+          />
+          <button onClick={addSegment} disabled={segmentCount > 24}>Add Segment</button>
+          <button onClick={removeSegment} disabled={segmentCount == 1}>Remove Segment</button>
+        </div>
       </div>
     </div>
   );
