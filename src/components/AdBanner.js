@@ -1,10 +1,16 @@
 import React, { useEffect } from 'react';
 
 const AdBanner = () => {
-  useEffect(() => {
-    // Load the ad script
-    (window.adsbygoogle = window.adsbygoogle || []).push({});
-  }, []);
+
+    useEffect(() => {
+      try {
+        if (window.adsbygoogle) {
+          window.adsbygoogle.push({});
+        }
+      } catch (e) {
+        console.error("AdSense error:", e);
+      }
+    }, []);
 
   return (
     <div className="ad-banner">
