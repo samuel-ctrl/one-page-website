@@ -1,26 +1,10 @@
 import React, { useState } from "react";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import Button1 from '../Button/script.js'
 
-const LuckyWheel = () => {
+const LuckyWheel = ({segments, removeSegment, addSegment, inputValue, setInputValue, ...rest}) => {
   const [rotation, setRotation] = useState(0);
   const [spinning, setSpinning] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-
-  const getRandomColor = () => {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  };
-
-  const [segments, setSegments] = useState([
-    { color: getRandomColor(), label: "label 1" },
-    { color: getRandomColor(), label: "label 2" },
-    { color: getRandomColor(), label: "label 3" },
-    { color: getRandomColor(), label: "label 4" },
-  ]);
 
   const spinWheel = () => {
     if (spinning) return;
@@ -33,41 +17,9 @@ const LuckyWheel = () => {
     }, 9000);
   };
 
-  const addSegment = () => {
-    if (inputValue.trim() === "") {
-      alert("Please enter a label for the segment!");
-      return;
-    }
-    setSegments([...segments, { color: getRandomColor(), label: inputValue }]);
-    setInputValue("");
-  };
-  
-  const removeSegment = (e) => {
-    if (segments.length > 2) {
-      const newSegments = [...segments];
-      newSegments.splice(e, 1);
-      setSegments(newSegments);
-    }
-  };
-
   return (
     <div style={{ textAlign: "center", position: "relative", width: "100%", display: "flex"}}>
-      <div style={{ position: "relative", width: "400px", height: "400px", padding: "10px"}}>
-        <div
-          style={{
-            position: "absolute",
-            top: "-15px",
-            left: "50%",
-            rotate: "180deg",
-            transform: "translateX(46%)",
-            width: "0",
-            height: "0",
-            borderLeft: "15px solid transparent",
-            borderRight: "15px solid transparent",
-            borderBottom: "30px solid red",
-            zIndex: 20,
-          }}
-        ></div>
+      <div style={{width:"400px", height:"400px"}}>
 
         <div
           style={{
@@ -82,6 +34,21 @@ const LuckyWheel = () => {
             position: "relative",
           }}
         >
+          <div
+            style={{
+              position: "absolute",
+              top: "-15px",
+              left: "50%",
+              rotate: "180deg",
+              transform: "translateX(46%)",
+              width: "0",
+              height: "0",
+              borderLeft: "15px solid transparent",
+              borderRight: "15px solid transparent",
+              borderBottom: "30px solid red",
+              zIndex: 20,
+            }}
+          ></div>
           <button
             onClick={spinWheel}
             style={{
@@ -110,25 +77,15 @@ const LuckyWheel = () => {
             Spin
           </button>
         </div>
-        <div style={{ marginTop: "20px" }}>
-          <input
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Enter segment label"
-            style={{ padding: "5px", marginRight: "10px", width:"350px"}}
-          />
-          <button onClick={addSegment} disabled={segments.length > 24}>Add Segment</button>
-        </div>
       </div>
 
+      <div>
 
-      <div
-        style={{
-          gap: "10px",
-          marginTop: "20px 10px",
-        }}
-      >
+        <div
+          style={{
+            margin: "20px 10px",
+          }}
+        >
         {segments.map((seg, i) => (
           <div
             key={i}
@@ -158,6 +115,22 @@ const LuckyWheel = () => {
             <RemoveCircleOutlineIcon style={{cursor: "pointer"}} onClick={()=>removeSegment(i)}/>
           </div>
         ))}
+      </div>
+
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => {
+            console.log(inputValue.length);
+            inputValue.length < 50 && setInputValue(e.target.value)
+          }}
+          placeholder="Enter segment label"
+          style={{ padding: "5px", marginRight: "10px", width:"350px"}}
+          disabled = {segments.length > 24}
+        />
+
+        <Button1 whenClick={()=>addSegment(inputValue)} disabled={segments.length > 24} text={"Add Segment"} />
+
       </div>
     </div>
   );
