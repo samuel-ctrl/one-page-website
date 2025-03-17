@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import Button1 from '../Button/script.js'
+import Button1 from '../Button/script.js';
 
 const LuckyWheel = ({segments, removeSegment, addSegment, inputValue, setInputValue, ...rest}) => {
   const [rotation, setRotation] = useState(0);
@@ -18,13 +18,30 @@ const LuckyWheel = ({segments, removeSegment, addSegment, inputValue, setInputVa
   };
 
   return (
-    <div style={{ textAlign: "center", position: "relative", width: "100%", display: "flex"}}>
-      <div style={{width:"400px", height:"400px"}}>
-
+    <div style={{ textAlign: "center", position: "relative", width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div style={{ position: "relative", width: "400px", height: "400px" }}>
+        {/* Arrow */}
         <div
           style={{
-            width: "400px",
-            height: "400px",
+            position: "absolute",
+            rotate: "180deg",
+            top: "-17px",
+            left: "50%",
+            transform: "translateX(50%)",
+            width: "0",
+            height: "0",
+            borderLeft: "15px solid transparent",
+            borderRight: "15px solid transparent",
+            borderBottom: "30px solid red",
+            zIndex: 20,
+          }}
+        ></div>
+
+        {/* Wheel */}
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
             borderRadius: "50%",
             background: `conic-gradient(
               ${segments.map((seg, i) => `${seg.color} ${(360 / segments.length) * i}deg ${(360 / segments.length) * (i + 1)}deg`).join(", ")}
@@ -34,21 +51,6 @@ const LuckyWheel = ({segments, removeSegment, addSegment, inputValue, setInputVa
             position: "relative",
           }}
         >
-          <div
-            style={{
-              position: "absolute",
-              top: "-15px",
-              left: "50%",
-              rotate: "180deg",
-              transform: "translateX(46%)",
-              width: "0",
-              height: "0",
-              borderLeft: "15px solid transparent",
-              borderRight: "15px solid transparent",
-              borderBottom: "30px solid red",
-              zIndex: 20,
-            }}
-          ></div>
           <button
             onClick={spinWheel}
             style={{
@@ -79,43 +81,42 @@ const LuckyWheel = ({segments, removeSegment, addSegment, inputValue, setInputVa
         </div>
       </div>
 
-      <div>
-
+      <div style={{ marginTop: "20px" }}>
         <div
           style={{
             margin: "20px 10px",
           }}
         >
-        {segments.map((seg, i) => (
-          <div
-            key={i}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: "8px",
-              backgroundColor: "#f9f9f9",
-              padding: "8px 12px",
-              borderRadius: "8px",
-              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-              marginBottom: "10px",
-            }}
-          >
-            <div style={{display:"flex"}}>
+          {segments.map((seg, i) => (
             <div
+              key={i}
               style={{
-                width: "20px",
-                height: "20px",
-                backgroundColor: seg.color,
-                borderRadius: "4px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "8px",
+                backgroundColor: "#f9f9f9",
+                padding: "8px 12px",
+                borderRadius: "8px",
+                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                marginBottom: "10px",
               }}
-            ></div>
-            <span style={{ fontSize: "14px", fontWeight: "500",marginLeft: "4px" }}>{seg.label}</span>
+            >
+              <div style={{display:"flex"}}>
+                <div
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    backgroundColor: seg.color,
+                    borderRadius: "4px",
+                  }}
+                ></div>
+                <span style={{ fontSize: "14px", fontWeight: "500", marginLeft: "4px" }}>{seg.label}</span>
+              </div>
+              <RemoveCircleOutlineIcon style={{cursor: "pointer"}} onClick={()=>removeSegment(i)}/>
             </div>
-            <RemoveCircleOutlineIcon style={{cursor: "pointer"}} onClick={()=>removeSegment(i)}/>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
         <input
           type="text"
@@ -125,12 +126,11 @@ const LuckyWheel = ({segments, removeSegment, addSegment, inputValue, setInputVa
             inputValue.length < 50 && setInputValue(e.target.value)
           }}
           placeholder="Enter segment label"
-          style={{ padding: "5px", marginRight: "10px", width:"350px"}}
-          disabled = {segments.length > 24}
+          style={{ padding: "5px", marginRight: "10px", width: "350px" }}
+          disabled={segments.length > 24}
         />
 
         <Button1 whenClick={()=>addSegment(inputValue)} disabled={segments.length > 24} text={"Add Segment"} />
-
       </div>
     </div>
   );

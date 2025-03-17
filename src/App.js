@@ -3,7 +3,7 @@ import Header from './components/Header';
 import AdBanner from './components/Ads/Google';
 import LuckyWheel from "./components/luckyWheel/script";
 import { getRandomColor } from "./components/utils";
-import "./App.css"
+import "./App.css";
 
 const App = () => {
   const [inputValue, setInputValue] = useState("Ice Cream");
@@ -15,22 +15,22 @@ const App = () => {
     { color: getRandomColor(), label: "Free Coffee" },
     { color: getRandomColor(), label: "Movie Night" },
   ]);
-  
+
   const addSegment = (value) => {
     console.log(value, value.length);
-    
+
     if (value.trim() === "") {
       alert("Please enter a label for the segment!");
       return;
     }
-    if (value.length > 50){
-      alert("Lable is must less than 50 lettrs.");
+    if (value.length > 50) {
+      alert("Label must be less than 50 letters.");
       return;
     }
     setSegments([...segments, { color: getRandomColor(), label: value }]);
     setInputValue("");
   };
-  
+
   const removeSegment = (e) => {
     if (segments.length > 2) {
       const newSegments = [...segments];
@@ -38,17 +38,24 @@ const App = () => {
       setSegments(newSegments);
     }
   };
+
   return (
     <div className="App">
       <Header />
-      <div style={{display:"flex"}}>
-        <LuckyWheel segments={segments} removeSegment={removeSegment} addSegment={addSegment} inputValue={inputValue} setInputValue={setInputValue}/>
+      <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
+        <LuckyWheel
+          segments={segments}
+          removeSegment={removeSegment}
+          addSegment={addSegment}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+        />
       </div>
       <div className="sticky-ad">
         <AdBanner />
       </div>
     </div>
   );
-}
+};
 
 export default App;
