@@ -51,9 +51,7 @@ const App = () => {
           setInputValue={setInputValue}
         />
       </div>
-      <div className="sticky-ad">
         <AdBanner />
-      </div>
     </div>
   );
 };

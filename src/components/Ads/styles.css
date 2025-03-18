@@ -1,4 +1,22 @@
-.ad-container {
-    height: auto;
-    border: black solid 1px;
+/* styles.css */
+.ad-banner.ad-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9; /* Light background for the container */
+    border: 2px solid #ddd; /* Border for the container */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Padding inside the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin: 20px 0; /* Margin for spacing */
+    width: 100%; /* Full width */
+    max-width: 728px; /* Maximum width for larger screens */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .ad-banner.ad-container {
+      max-width: 100%; /* Full width on smaller screens */
+      padding: 5px; /* Reduce padding on smaller screens */
+    }
   }
