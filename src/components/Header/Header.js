@@ -4,12 +4,7 @@ import './Header.css';
 const Header = () => {
   return (
     <header className="app-header">
-      <div className="header-content">
-        <div className="title-container">
-          <h1 className="main-title">Lucky Wheel</h1>
-          <p className="subtitle">Spin to Win Fun Prizes!</p>
-        </div>
-        
+      <div className="header-content">          
         <div className="ad-container">
           <a 
             href="https://beta.publishers.adsterra.com/referral/5pBNiTcQQj" 
