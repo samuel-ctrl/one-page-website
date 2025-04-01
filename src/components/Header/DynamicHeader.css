@@ -1,0 +1,234 @@
+/* DynamicHeader.css */
+.dynamic-header {
+  position: relative;
+  z-index: 100;
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --hover-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--primary-gradient);
+  color: #fff;
+  padding: 2rem 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  gap: 1.5rem;
+}
+
+.title-group {
+  overflow: hidden;
+}
+
+.main-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 2.25rem;
+  line-height: 1.2;
+  margin: 0;
+  animation: slideIn 0.5s ease;
+}
+
+.mode-icon {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0.5rem 0 0;
+  animation: fadeIn 0.5s 0.1s ease both;
+}
+
+.mode-selector {
+  position: relative;
+  z-index: 1000;
+  min-width: 240px;
+}
+
+.dropdown-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  color: inherit;
+  cursor: pointer;
+  transition: var(--hover-transition);
+}
+
+.dropdown-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.dropdown-toggle.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.current-mode {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dropdown-arrow svg {
+  transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.open svg {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  z-index: 1001;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: var(--hover-transition);
+  pointer-events: none;
+}
+
+.dropdown-menu.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.mode-option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  background: transparent;
+  border: none;
+  color: #374151;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--hover-transition);
+}
+
+.mode-option:hover {
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.mode-option.selected {
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.option-icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.option-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.option-title {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.option-subtitle {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.context-section {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 2rem auto 0;
+  padding: 0 1.5rem;
+}
+
+.context-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  animation: scaleUp 0.4s 0.2s ease both;
+}
+
+.context-description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  transition: var(--hover-transition);
+}
+
+.feature-card:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .main-title {
+    font-size: 1.875rem;
+  }
+  
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 1.5rem;
+  }
+  
+  .context-description {
+    font-size: 1rem;
+  }
+}
