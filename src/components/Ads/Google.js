@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import './styles.css';
+import React, { useEffect, useRef, useState } from "react";
+import "./styles.css";
 
 const AdBanner = () => {
   const adContainer = useRef(null);
@@ -10,17 +10,20 @@ const AdBanner = () => {
       try {
         if (window.adsbygoogle) {
           // If ad container exists and has no children, try to load the ad
-          if (adContainer.current && adContainer.current.children.length === 0) {
+          if (
+            adContainer.current &&
+            adContainer.current.children.length === 0
+          ) {
             window.adsbygoogle = window.adsbygoogle || [];
             window.adsbygoogle.push({});
-            
+
             // Set a timeout to check if the ad loaded
             const timeout = setTimeout(() => {
-              if (adContainer.current.innerHTML.trim() === '') {
+              if (adContainer.current.innerHTML.trim() === "") {
                 setShowFallbackAd(true);
               }
             }, 2000); // Check after 2 seconds if ad didn't load
-            
+
             return () => clearTimeout(timeout);
           }
         } else {
@@ -51,7 +54,7 @@ const AdBanner = () => {
         <div ref={adContainer}>
           <ins
             className="adsbygoogle"
-            style={{ display: 'block' }}
+            style={{ display: "block" }}
             data-ad-client="ca-pub-4005409526739627"
             data-ad-slot="9126958660"
             data-ad-format="auto"

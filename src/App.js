@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from "react";
-import Header from './components/Header/DynamicHeader';
-import AdBanner from './components/Ads/Google';
+import Cookies from "./components/Cookies/script";
+import useSimpleStore from "./store/SimpleStore";
+import "./App.css";
+import Header from "./components/Header/DynamicHeader";
+import AdBanner from "./components/Ads/Google";
 import LuckyWheel from "./components/luckyWheel/script";
 import Footer from "./components/Footer";
+import Chat from "./components/Chat/script";
 import { getRandomColor } from "./components/utils";
-import Cookies from "./components/Cookies/script";
-import "./App.css";
+import { featureOptionEnum } from "./common/constant.tsx";
+
+const COMPONENT_MAP = {
+  [featureOptionEnum.LUCKY_WHEEL]: LuckyWheel,
+  [featureOptionEnum.DIRECT_CHAT]: Chat,
+};
 
 const App = () => {
+  const { activeMode } = useSimpleStore();
   const [inputValue, setInputValue] = useState("Ice Cream");
   const [segments, setSegments] = useState([
     { color: getRandomColor(), label: "Kiss or Slap" },
@@ -20,13 +29,14 @@ const App = () => {
   const [cookiesAccepted, setCookiesAccepted] = useState(false);
 
   useEffect(() => {
-    // Check if cookies were previously accepted
-    const accepted = localStorage.getItem('cookiesAccepted') === 'true';
+    const accepted = localStorage.getItem("cookiesAccepted") === "true";
     setCookiesAccepted(accepted);
   }, []);
 
+  const ActiveComponent = COMPONENT_MAP[activeMode] || LuckyWheel;
+
   const acceptCookies = () => {
-    localStorage.setItem('cookiesAccepted', 'true');
+    localStorage.setItem("cookiesAccepted", "true");
     setCookiesAccepted(true);
   };
 
@@ -53,34 +63,25 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header />      
+      <Header />
       <main className="content-section">
-        <div className="game-container">
-          <LuckyWheel
-            segments={segments}
-            removeSegment={removeSegment}
-            addSegment={addSegment}
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-          />
-        </div>
-
-        <section className="instructions">
-          <h2>How to Play</h2>
-          <ol>
-            <li>Click the SPIN button to start the wheel</li>
-            <li>Wait for the wheel to stop rotating</li>
-            <li>View your result in the popup message</li>
-            <li>Add custom segments using the input field</li>
-          </ol>
-        </section>
+        <ActiveComponent
+          segments={segments}
+          removeSegment={removeSegment}
+          addSegment={addSegment}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+        />
       </main>
 
       <AdBanner />
 
       <Footer />
 
-      <Cookies cookiesAccepted={cookiesAccepted} acceptCookies={acceptCookies} />
+      <Cookies
+        cookiesAccepted={cookiesAccepted}
+        acceptCookies={acceptCookies}
+      />
     </div>
   );
 };
